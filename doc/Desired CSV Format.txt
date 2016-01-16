@@ -1,0 +1,10 @@
+Date	Tweet					Sentmt		Open		Close (Output)
+1/12/15 "Screw microsoft"		0			$60			$50
+1/13/15 "I love the tablet"		1			$50			$25
+1/16/15 "Windows 10 sucks"		0			$50			$60
+2/1/23  "go microsoft"			1			$50			$100
+
+
+
+Given
+1/15/16	"I love microsoft"		1			$60			?
