@@ -16,17 +16,36 @@ body
 
 .header {
 	font-family: 'Montserrat', sans-serif;
-	color: #C67C6E;
+	color: #A6C675;
+}
+
+input[type="text"]
+{
+	margin: 10px;
+	padding: 10px;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+  border-bottom: solid 2px #c9c9c9;
+
+  color: #5b5b5b;
 
 }
 
-.btn-main{
-	background-color: #C67C6E;
+input[type="text"]:focus,
+input[type="text"].focus {
+  border-bottom: solid 2px #969696;
+}
+
+.btn-brief{
+	margin: 10px;
+	padding: 5px 20px 5px 20px;
+	background-color: #A6C675;
 	border-radius: 0px;
 	font-style: sans-serif;
 	color: white;
 }
 
-.btn-main:hover{
+.btn-brief:hover{
 	color: green;
 }
