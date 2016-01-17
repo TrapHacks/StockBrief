@@ -3,14 +3,15 @@ var lineChartData = {}
 
 //on search button click
 $("#search").click(function() {
-  //post request that gets data  
-  var return_data = $.post("/search","Apple",function(data) {
-    console.log(data);
+  //post request that gets data 
+  console.log('hello');
+  var search_val = $('#stock_name').val();
+  var return_data = $.post("/search",search_val,function(data) {
     lineChartData= {
-        labels : data.dates.slice(0,50).slice(4),
+        labels : data.dates.slice(0,50),
         datasets : [
             {
-                label: "My Second dataset",
+                label: "Closing Prices",
                 fillColor : "#75C5C6",
                 strokeColor : "#5b5b5b",
                 pointColor : "#75C5C6",
@@ -23,7 +24,6 @@ $("#search").click(function() {
     }
 
   });
-  console.log("return:",return_data);
 });
 
 // event handler for when the collapse is shown
