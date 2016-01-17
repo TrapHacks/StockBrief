@@ -33,18 +33,16 @@ with open('results.csv', 'r') as readfile:
     reader = csv.reader(readfile)
     with open('ultra_results.csv', 'w') as outfile:
         writer = csv.writer(outfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
+        writer.writerow(['Date', 'Tweet', 'Sentiment', 'Company Symbol', 'Opening Price', 'Closing Price'])
+        for row in reader:
             try:
                 date = row[0][:10]
-                company_name = row[4]
+                company_name = row[3]
                 symbol = symbol_map[company_name]
                 open_price = oc_map[symbol][date][0]
                 close_price = oc_map[symbol][date][1]
                 tweet = row[1]
+                sentiment = row[2]
+                writer.writerow([date, tweet, sentiment, symbol, open_price, close_price])
             except:
                 pass
-
-
-
-    
-
