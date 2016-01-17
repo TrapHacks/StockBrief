@@ -1,3 +1,5 @@
 reddit_data/
 .DS_Store
-data
+data/*.json
+data/*.csv
+data/*.properties
