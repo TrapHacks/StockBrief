@@ -8,10 +8,10 @@ $("#search").click(function() {
   var search_val = $('#stock_name').val();
   var return_data = $.post("/search",search_val,function(data) {
     lineChartData= {
-        labels : data.dates.slice(0,50).slice(4),
+        labels : data.dates.slice(0,50),
         datasets : [
             {
-                label: "My Second dataset",
+                label: "Closing Prices",
                 fillColor : "#75C5C6",
                 strokeColor : "#5b5b5b",
                 pointColor : "#75C5C6",
