@@ -9,8 +9,9 @@ def azure_req(date, symbol, sentiment, opening_price):
 
                     "input1":
                     {
-                        "ColumnNames": ["Date", "Sentiment", "Company Symbol", "Opening Price", "Closing Price"],
-                        "Values": [[ date, sentiment, symbol, str(opening_price), "" ], [ "", "value", "value", "0", "0" ], ]
+                        "ColumnNames": ["Date", "Sentiment", "Company Symbol", "Opening Price"],
+                        "Values": [ [ date, sentiment, symbol, str(opening_price) ], [ "", "value", "value", "0" ], ]
+                        
         
                     }, 
             },
@@ -21,8 +22,8 @@ def azure_req(date, symbol, sentiment, opening_price):
 
     body = str.encode(json.dumps(data))
 
-    url = 'https://ussouthcentral.services.azureml.net/workspaces/b6ac40870fe442feacc50a8ad7d58844/services/bb9d3272fa034cbf810362a5f5311439/execute?api-version=2.0&details=true'
-    api_key = 'ODRlaG+rnsq9QEfCF5kUuX3Ew+qQabtqveIURd72DqRY/d1mikXM1lj1AMP4q+f1ni38TcKaNBQYwXJzgOiMXQ==' 
+    url = 'https://ussouthcentral.services.azureml.net/workspaces/b6ac40870fe442feacc50a8ad7d58844/services/edd94a9153d44e71ba85f660e73d70ac/execute?api-version=2.0&details=true'
+    api_key = 'mJhdmrK0B9jLIhQsQOgOetDBdIvsoTFrCbPMfMPIipH2AmFgdno8IhgV0TIFZTvTrdpOrH6oAEcuvXcl3iHmWQ=='
     headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
     req = urllib2.Request(url, body, headers) 
@@ -44,4 +45,5 @@ def azure_req(date, symbol, sentiment, opening_price):
         print(error.info())
 
         print(json.loads(error.read()))                 
+
 
