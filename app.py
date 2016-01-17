@@ -20,17 +20,6 @@ def search():
 	symbol = request.get_data()
 	print symbol
 
-	date_list = []
-	price_list = []
-
-	with open('stock_data/'+symbol+'.csv', 'rb') as csv_file:
-		csv_reader = csv.reader(csv_file, delimiter=',', quotechar='|')
-		next(csv_reader, None)
-
-		for row in csv_reader:
-			date_list.append(row[5])
-			price_list.append(row[6])
-
 	date_list2 = []
 	price_list2 = []
 
@@ -41,27 +30,7 @@ def search():
 		date_list2.append(data['Date'])
 		price_list2.append(data['Close'])
 
-	print 'dl==='
-	print type(date_list[0])
-	print date_list
-	print '\n\n'
-	print 'pl==='
-	print type(price_list[0])
-	print price_list
-	print '\n\n'
-
-	print 'dl2==='
-	print type(date_list2[0])
-	print date_list
-	print '\n\n'
-	print 'pl2==='
-	print type(price_list2[0])
-	print price_list
-	print '\n\n'
-
-
-
-	return jsonify(dates=date_list, prices=price_list)
+	return jsonify(dates=date_list2, prices=price_list2)
 
 @app.route("/nytimes", methods=['POST'])
 def nytimes():
