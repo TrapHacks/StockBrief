@@ -105,7 +105,11 @@ def tweets():
 	twitter_sentiment = tweet_query(symbol)
 	json_result = {
 		'success' : True,
-		'sentiment' : twitter_sentiment[2]
+		'sentiment' : twitter_sentiment[2],
+		'num_pos' : str(twitter_sentiment[0]),
+		'num_neg' : str(twitter_sentiment[1]),
+		'percent_pos' : str((float(twitter_sentiment[0]) / (twitter_sentiment[0] + twitter_sentiment[1])) * 100),
+		'percent_neg' : str((float(twitter_sentiment[1]) / (twitter_sentiment[0] + twitter_sentiment[1])) * 100)
 	}
 
 	return jsonify(json_result)
@@ -119,7 +123,7 @@ def not_found(error):
 def favicon():
 	return send_from_directory(os.path.join(app.root_path,'static'),
 		'favicon.png', mimetype='image/x-icon')
-'''
+
 if __name__ == '__main__':
 	with open('stocks.csv', 'rb') as readfile:
 		reader = csv.reader(readfile)
@@ -132,4 +136,3 @@ if __name__ == '__main__':
 	app.debug = True
 
 	app.run(host='0.0.0.0', port=port)
-'''
