@@ -15,7 +15,7 @@ app = Flask(__name__)
 symbol_map = {}
 
 if 'DYNO' in os.environ:
-    keys = os.environ['NY_TIMES_KEY']
+    nytimes_api_key = os.environ['NY_TIMES_KEY']
 else:
     keys = open('login.properties', 'rb')
     nytimes_api_key = keys.readline().strip()
