@@ -4,4 +4,4 @@ stock_data/
 data/*.json
 data/*.csv
 data/*.properties
-
+*.properties
