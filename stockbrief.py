@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 from headline_sentiments import nytimes_sentiment
 from scripts.twitter_search import tweet_query
 from microsoft_request import azure_req
@@ -49,7 +49,7 @@ def nytimes_articles():
 
 	if symbol_map.has_key(query):
 		query = query + ' ' + symbol_map[query]
-	
+
 	print query
 
 	search_obj = nytimes.get_article_search_obj(nytimes_api_key)
@@ -115,6 +115,11 @@ def tweets():
 def not_found(error):
 	return 'This page does not exist', 404
 
+@app.route('/favicon.png')
+def favicon():
+	return send_from_directory(os.path.join(app.root_path,'static'),
+		'favicon.png', mimetype='image/x-icon')
+
 if __name__ == '__main__':
 	with open('stocks.csv', 'rb') as readfile:
 		reader = csv.reader(readfile)
@@ -126,4 +131,4 @@ if __name__ == '__main__':
 	# if port == 5000:
 	app.debug = True
 
-	app.run()
+	app.run(host='0.0.0.0', port=port)

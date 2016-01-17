@@ -47,16 +47,26 @@ $("#search").click(function() {
   });
   // --------------------------------------------------------
   // TWITTER ------------------------------------------------
-  // $.post("/tweet", search_val, function(data) {
+  $.post("/tweet", search_val, function(data) {
+    console.log(data);
+    var sentiment = data.sentiment;
+    if(sentiment == "Negative"){
+      console.log("U FAKED UP");
+    }
+    else{
+      console.log("YO");
+    }
+  })
+  .done(function(data){
+    $.post('/prediction', search_val, function(data2) {
+      console.log(data2);
+    });
+  });
+  //----------------------------------------------------------
+  // AZUREEEEEeeeeeeeee --------------------------------------
+  // $.post("/prediction", search_val, function(data) {
   //   console.log(data);
-  //   var sentiment = data.sentiment;
-  //   if(sentiment == "Negative"){
-  //     console.log("U FAKED UP");
-  //   }
-  //   else{
-  //     console.log("YO");
-  //   }
-  // });
+  // })
 
 });
 

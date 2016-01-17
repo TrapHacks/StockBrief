@@ -10,6 +10,11 @@ h1,h2,h3
 	font-family: 'Montserrat', sans-serif;
 }
 
+a:hover
+{
+	border-bottom: none;
+}
+
 @media (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -100,5 +105,32 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 {
 	font-size: 16px;
 	line-height: 35px;
-	color: #white;
+	color: #367879;
+	transition: color 0.5s ease;
+}
+
+.title:hover
+{
+	color: #5b5b5b;
+	border: none;
+}
+
+.twitter
+{
+	display: inline-block;
+	text-align: center;
+	height: 200px;
+}
+
+.azure
+{
+	display: inline-block;
+	text-align: center;
+	height: 200px;
+}
+
+.tw-blue
+{
+	color: #55acee;
+	font-size: 20px;
 }
