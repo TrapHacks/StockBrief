@@ -12,8 +12,13 @@ import time
 
 app = Flask(__name__)
 
-keys = open('login.properties', 'rb')
-nytimes_api_key = keys.readline().strip()
+symbol_map = {}
+
+if 'DYNO' in os.environ:
+    keys = os.environ['NY_TIMES_KEY']
+else:
+    keys = open('login.properties', 'rb')
+    nytimes_api_key = keys.readline().strip()
 
 @app.route("/")
 def index():
@@ -22,7 +27,6 @@ def index():
 @app.route("/search", methods=['POST'])
 def search():
 	symbol = request.get_data()
-	print symbol
 
 	date_list2 = []
 	price_list2 = []
@@ -42,6 +46,11 @@ def search():
 @app.route("/nytimes", methods=['POST'])
 def nytimes_articles():
 	query = request.get_data()
+
+	if symbol_map.has_key(query):
+		query = query + ' ' + symbol_map[query]
+	
+	print query
 
 	search_obj = nytimes.get_article_search_obj(nytimes_api_key)
 	result = search_obj.article_search(q=query, sort="newest", fl="headline,pub_date,lead_paragraph,web_url")
@@ -96,6 +105,11 @@ def not_found(error):
 	return 'This page does not exist', 404
 
 if __name__ == '__main__':
+	with open('stocks.csv', 'rb') as readfile:
+		reader = csv.reader(readfile)
+		for row in reader:
+			symbol_map[row[0]] = row[1]
+
 	port = int(os.environ.get('PORT', 5000))
 
 	if port == 5000:

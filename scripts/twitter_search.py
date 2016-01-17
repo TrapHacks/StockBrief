@@ -1,13 +1,20 @@
 import tweepy
 import requests
+import os
 from textblob import TextBlob
 
-with open('twitter_login.properties', 'rb') as login_file:
-	login_info = login_file.readlines()
-	api_key = login_info[0].replace('\n','')
-	api_secret = login_info[1].replace('\n','')
-	access_token_key = login_info[2].replace('\n','')
-	access_token_secret=login_info[3].replace('\n','')
+if 'DYNO' in os.environ:
+	api_key = os.environ['TWITTER_API_KEY']
+	api_secret = os.environ['TWITTER_API_SECRET']
+	access_token_key = os.environ['TWITTER_ACCESS_TOKEN_KEY']
+	access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET']
+else:
+	with open('twitter_login.properties', 'rb') as login_file:
+		login_info = login_file.readlines()
+		api_key = login_info[0].replace('\n','')
+		api_secret = login_info[1].replace('\n','')
+		access_token_key = login_info[2].replace('\n','')
+		access_token_secret=login_info[3].replace('\n','')
 
 def tweet_query(query):
 	auth = tweepy.OAuthHandler(api_key, api_secret)
