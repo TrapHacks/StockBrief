@@ -3,8 +3,12 @@
 from flask import Flask, render_template, jsonify
 import csv
 import os
+import nytimes
 
 app = Flask(__name__)
+
+keys = open('login.properties', 'rb')
+nytimes_api_key = keys.readline().strip()
 
 @app.route("/")
 def index():
@@ -12,10 +16,12 @@ def index():
 
 @app.route("/search", methods=['POST'])
 def search():
+	symbol = request.form['search_val']
+
 	date_list = []
 	price_list = []
 
-	with open('test_data.csv', 'rb') as csv_file:
+	with open('stock_data'+symbol+'.csv', 'rb') as csv_file:
 		csv_reader = csv.reader(csv_file, delimiter=',', quotechar='|')
 		next(csv_reader, None)
 
@@ -24,6 +30,21 @@ def search():
 			price_list.append(row[6])
 
 	return jsonify(dates=date_list, prices=price_list)
+
+@app.route("/nytimes", methods=['POST'])
+def nytimes():
+	query = '3M Co'
+
+	search_obj = nytimes.get_article_search_obj(nytimes_api_key)
+	response = search.articles_search(q=query, sort='newest', fl='headline,pub_date,lead_paragraph,web_url')
+
+	json = 'invalid return'
+	try:
+		json = response['response']['docs']
+	except Exception, e:
+		raise e
+
+	return json
 
 @app.errorhandler(404)
 def not_found(error):
