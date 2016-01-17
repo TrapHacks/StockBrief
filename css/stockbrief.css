@@ -1,0 +1,92 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+body
+{
+	background-color: #F1F1F1;
+	margin-top: 20px;
+}
+
+h1,h2,h3
+{
+	font-family: 'Montserrat', sans-serif;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.header {
+	font-family: 'Montserrat', sans-serif;
+	color: #64B9B9;
+	margin-top: 20px;
+}
+
+.brf-input
+{
+	width: 200px;
+}
+
+input[type="text"]
+{
+	margin: 20px;
+	padding: 10px;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+  border-bottom: solid 2px #c9c9c9;
+
+	text-align: center;
+  color: #5b5b5b;
+  /*transition: border 0.5s ease;*/
+
+}
+
+input[type="text"]:focus
+{
+	outline: none;
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+
+.btn-brief{
+	margin: 20px;
+	padding: 7px 25px 7px 25px;
+	background-color: #75C5C6;
+	border-radius: 0px;
+	font-style: sans-serif;
+	border-bottom: solid 2px #769C9C;
+	color: white;
+	transition: background-color 0.5s ease;
+}
+
+.btn-brief:hover{
+	background-color: #3FC2C3;
+	color: white;
+}
+
+.btn-brief:focus{
+	color: white;
+}
+
+.card-top
+{
+	background-color: white;
+	border-radius: 0px;
+}
+
+.well
+{
+	background-color: #E6F5F5;
+	color: #5b5b5b;
+	border-radius: 0px;
+	border-style: none;
+	border-bottom: solid 2px #c9c9c9;
+	min-height: 324px;
+}
