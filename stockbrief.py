@@ -61,23 +61,34 @@ def nytimes_articles():
 @app.route('/prediction', methods=['POST'])
 def prediction():
 	symbol = request.get_data()
-	print symbol
 	date = time.strftime('%Y-%m-%d')
 	stock = yahoo_finance.Share(symbol)
 	opening_price = stock.get_open()
-
+	closing_price = 0.0
 	twitter_sentiment = tweet_query(symbol)
 	headline_sentiment = nytimes_sentiment(symbol)
 	overall_sentiment_num = twitter_sentiment[0] + headline_sentiment[0]
 	overall_sentiment = 'Positive' if overall_sentiment_num > 505 else 'Negative'
-	azure_sentiment = azure_req(date, symbol, overall_sentiment, opening_price)
-	
-	results = azure_sentiment['Results']['output1']['value']['Values'][0]
-	closing_price = results[5]
+	pos_azure_sentiment = azure_req(date, symbol, 'Positive', float(opening_price) * 1.05)
+	neg_azure_sentiment = azure_req(date, symbol, 'Negative', float(opening_price) * .95)
+
+	pos_val = float(pos_azure_sentiment['Results']['output1']['value']['Values'][0][4])
+	neg_val = float(neg_azure_sentiment['Results']['output1']['value']['Values'][0][4])
+	print pos_val, neg_val
+	midpoint = abs((pos_val + neg_val) / 2)
+	if overall_sentiment == 'Positive':
+		closing_price +=  float(opening_price) + (((pos_val - midpoint) / midpoint) * float(opening_price))
+	else:
+		closing_price +=  float(opening_price) - (((midpoint - neg_val) / midpoint) * float(opening_price))
+
+	difference = closing_price - float(opening_price)
+	percent_diff = (difference / float(opening_price)) * 100 
 	json_result = {
 		'success': True,
 		'opening_price' : opening_price,
-		'closing_price' : closing_price
+		'closing_price': closing_price,
+		'difference': str(percent_diff),
+		'sentiment': overall_sentiment
 	}
 
 	return jsonify(json_result)

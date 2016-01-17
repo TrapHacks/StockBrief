@@ -19,7 +19,7 @@ else:
 def tweet_query(query):
 	auth = tweepy.OAuthHandler(api_key, api_secret)
 	api = tweepy.API(auth)
-	max_tweets = 1000
+	max_tweets = 200
 	searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
 	tweet_bodies = []
 	num_pos = 0
@@ -34,5 +34,5 @@ def tweet_query(query):
 		else:
 			num_neg += 1
 
-	overall_sentiment = 'Positive' if num_pos > 500 else 'Negative'
+	overall_sentiment = 'Positive' if num_pos > 100 else 'Negative'
 	return [num_pos, num_neg, overall_sentiment]
