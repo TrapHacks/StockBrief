@@ -40,7 +40,7 @@ $("#search").click(function() {
     var times_var = data.docs[i]
     var main_headline = times_var.headline.main;
     var url = times_var.web_url;
-    var date = times_var.pub_date.slice(0,9);
+    var date = times_var.pub_date.slice(0,10);
     //check for non existen urls
     $('#articles').append("<div class='nytimes'><a class='title' href='" + url + "'>" + main_headline + "</a> | <span style='font-size: 12; color: #969696'>" + date + "</span></div>");
   }
