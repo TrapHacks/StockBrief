@@ -18,7 +18,6 @@ def index():
 @app.route("/search", methods=['POST'])
 def search():
 	symbol = request.get_data()
-
 	print symbol
 
 	date_list = []
@@ -44,16 +43,20 @@ def search():
 
 	print 'dl==='
 	print type(date_list[0])
+	print date_list
 	print '\n\n'
 	print 'pl==='
 	print type(price_list[0])
+	print price_list
 	print '\n\n'
 
 	print 'dl2==='
 	print type(date_list2[0])
+	print date_list
 	print '\n\n'
 	print 'pl2==='
 	print type(price_list2[0])
+	print price_list
 	print '\n\n'
 
 
