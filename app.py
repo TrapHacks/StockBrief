@@ -36,19 +36,20 @@ def search():
 	return jsonify(dates=date_list2, prices=price_list2)
 
 @app.route("/nytimes", methods=['POST'])
-def nytimes():
-	query = '3M Co'
+def nytimes_articles():
+	query = request.get_data()
 
 	search_obj = nytimes.get_article_search_obj(nytimes_api_key)
-	response = search.articles_search(q=query, sort='newest', fl='headline,pub_date,lead_paragraph,web_url')
+	result = search_obj.article_search(q=query, sort="newest", fl="headline,pub_date,lead_paragraph,web_url")
 
-	json = 'invalid return'
 	try:
-		json = response['response']['docs']
+		docs = result['response']['docs']
+		for doc in docs:
+			print jsonify(doc)
 	except Exception, e:
 		raise e
 
-	return json
+	return jsonify(docs=docs)
 
 @app.errorhandler(404)
 def not_found(error):
