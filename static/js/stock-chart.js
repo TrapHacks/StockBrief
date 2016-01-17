@@ -9,7 +9,7 @@ $("#search").click(function() {
   })
   .done(function(data) {
     lineChartData= {
-        labels : data.dates.slice(data.dates.length-21,data.dates.length-1),
+        labels : data.dates.slice(data.dates.length-21,data.dates.length),
         datasets : [
             {
                 label: "Closing Prices",
@@ -19,7 +19,7 @@ $("#search").click(function() {
                 pointStrokeColor : "#5b5b5b",
                 pointHighlightFill : "#fff",
                 pointHighlightStroke : "rgba(151,187,205,1)",
-                data: data.prices.slice(data.prices.length-60,data.prices.length-1)
+                data: data.prices.slice(data.prices.length-60,data.prices.length)
             }
         ]
     }
