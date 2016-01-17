@@ -8,7 +8,7 @@ with open('twitter_login.properties', 'rb') as login_file:
 	api_secret = login_info[1].replace('\n','')
 	access_token_key = login_info[2].replace('\n','')
 	access_token_secret=login_info[3].replace('\n','')
-	
+
 def tweet_query(query):
 	auth = tweepy.OAuthHandler(api_key, api_secret)
 	api = tweepy.API(auth)
@@ -27,10 +27,5 @@ def tweet_query(query):
 		else:
 			num_neg += 1
 
-	overall_sentiment = 'positive' if num_pos > 500 else 'negative'
+	overall_sentiment = 'Positive' if num_pos > 500 else 'Negative'
 	return [num_pos, num_neg, overall_sentiment]
-
-
-
-
-
