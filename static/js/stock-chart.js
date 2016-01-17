@@ -1,13 +1,6 @@
 var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 var lineChartData = {}
 
-//fix for enter issue thats super stupid 
-$("#search").keypress(function(e) {
-    if(e.which == 13) {
-        $("#search").click();
-    }
-});
-
 //on search button click
 $("#search").click(function() {
   //post request that gets data 
