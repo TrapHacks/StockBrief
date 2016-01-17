@@ -12,8 +12,11 @@ import time
 
 app = Flask(__name__)
 
-keys = open('login.properties', 'rb')
-nytimes_api_key = keys.readline().strip()
+if 'DYNO' in os.environ:
+    keys = os.environ['NY_TIMES_KEY']
+else:
+    keys = open('login.properties', 'rb')
+    nytimes_api_key = keys.readline().strip()
 
 @app.route("/")
 def index():
