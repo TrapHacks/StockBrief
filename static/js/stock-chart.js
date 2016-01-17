@@ -5,7 +5,8 @@ var lineChartData = {}
 $("#search").click(function() {
   //post request that gets data 
   var search_val = $('#stock_name').val();
-  var return_data = $.post("/search",search_val,function(data) {
+  console.log({"search_val": search_val});
+  var return_data = $.post("/search",{"search_val": search_val},function(data) {
     lineChartData= {
         labels : data.dates.slice(0,50).slice(4),
         datasets : [
