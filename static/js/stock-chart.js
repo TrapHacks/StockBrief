@@ -6,7 +6,9 @@ $("#search").click(function() {
   //post request that gets data 
   console.log('hello');
   var search_val = $('#stock_name').val();
-  var return_data = $.post("/search",search_val,function(data) {
+  var return_data = $.post("/search",search_val,function() {
+  })
+  .done(function(data) {
     lineChartData= {
         labels : data.dates.slice(0,50),
         datasets : [
@@ -18,20 +20,21 @@ $("#search").click(function() {
                 pointStrokeColor : "#5b5b5b",
                 pointHighlightFill : "#fff",
                 pointHighlightStroke : "rgba(151,187,205,1)",
-                data : data.prices.slice(0,50)
+                data: data.prices.slice(0,50)
             }
         ]
     }
 
-  });
-});
-
-// event handler for when the collapse is shown
-$(".collapse").on('shown.bs.collapse', function(){
     var ctx = document.getElementById("canvas").getContext("2d");
     window.myLine = new Chart(ctx).Line(lineChartData, {
         responsive: true,
         bezierCurve: false,
         scaleShowVerticalLines: false
     });
+
+  });
 });
+
+// event handler for when the collapse is shown
+// $(".collapse").on('shown.bs.collapse', function(){
+// });
