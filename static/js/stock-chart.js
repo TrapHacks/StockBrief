@@ -1,12 +1,19 @@
 var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 var lineChartData = {}
 
+//fix for enter issue thats super stupid 
+$("#search").keypress(function(e) {
+    if(e.which == 13) {
+        $("#search").click();
+    }
+});
+
 //on search button click
 $("#search").click(function() {
   //post request that gets data 
+  console.log('hello');
   var search_val = $('#stock_name').val();
-  console.log({"search_val": search_val});
-  var return_data = $.post("/search",{"search_val": search_val},function(data) {
+  var return_data = $.post("/search",search_val,function(data) {
     lineChartData= {
         labels : data.dates.slice(0,50).slice(4),
         datasets : [
@@ -24,7 +31,6 @@ $("#search").click(function() {
     }
 
   });
-  console.log("return:",return_data);
 });
 
 // event handler for when the collapse is shown
