@@ -10,7 +10,7 @@ $("#search").click(function() {
   })
   .done(function(data) {
     lineChartData= {
-        labels : data.dates.slice(0,50),
+        labels : data.dates.slice(data.dates.length-60,data.dates.length-1),
         datasets : [
             {
                 label: "Closing Prices",
@@ -20,7 +20,7 @@ $("#search").click(function() {
                 pointStrokeColor : "#5b5b5b",
                 pointHighlightFill : "#fff",
                 pointHighlightStroke : "rgba(151,187,205,1)",
-                data: data.prices.slice(0,50)
+                data: data.prices.slice(data.prices.length-60,data.prices.length-1)
             }
         ]
     }
@@ -29,6 +29,7 @@ $("#search").click(function() {
     window.myLine = new Chart(ctx).Line(lineChartData, {
         responsive: true,
         bezierCurve: false,
+        pointDotRadius: 4,
         scaleShowVerticalLines: false
     });
 

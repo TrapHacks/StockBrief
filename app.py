@@ -30,6 +30,9 @@ def search():
 		date_list2.append(data['Date'])
 		price_list2.append(data['Close'])
 
+	date_list2.reverse()
+	price_list2.reverse()
+
 	return jsonify(dates=date_list2, prices=price_list2)
 
 @app.route("/nytimes", methods=['POST'])
