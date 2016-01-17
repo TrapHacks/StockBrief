@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify, request
 import csv
 import os
 import nytimes
+import yahoo_finance
 
 app = Flask(__name__)
 
@@ -23,13 +24,20 @@ def search():
 	date_list = []
 	price_list = []
 
-	with open('stock_data/'+symbol+'.csv', 'rb') as csv_file:
-		csv_reader = csv.reader(csv_file, delimiter=',', quotechar='|')
-		next(csv_reader, None)
+	stock = yahoo_finance.Share(symbol)
+	stock_data = stock.get_historical('2015-10-01', '2016-01-16')
+	print stock_data
+	for data in stock_data:
+		date_list.append(data['Date'])
+		price_list.append(data['Close'])
 
-		for row in csv_reader:
-			date_list.append(row[5])
-			price_list.append(row[6])
+	# with open('stock_data/'+symbol+'.csv', 'rb') as csv_file:
+	# 	csv_reader = csv.reader(csv_file, delimiter=',', quotechar='|')
+	# 	next(csv_reader, None)
+
+	# 	for row in csv_reader:
+	# 		date_list.append(row[5])
+	# 		price_list.append(row[6])
 
 	return jsonify(dates=date_list, prices=price_list)
 
