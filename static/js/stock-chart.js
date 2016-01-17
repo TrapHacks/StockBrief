@@ -49,6 +49,24 @@ $("#search").click(function() {
   // TWITTER ------------------------------------------------
   $.post("/tweet", search_val, function(data) {
     console.log(data);
+    var doughnutData = [
+            {
+              value: data.percent_neg,
+              color:"#F7464A",
+              highlight: "#FF5A5E",
+              label: "Neg %"
+            },
+            {
+              value: data.percent_pos,
+              color: "#46BFBD",
+              highlight: "#5AD3D1",
+              label: "Pos %"
+            }
+          ];
+
+    var ctx = document.getElementById("canvas2").getContext("2d");
+    window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+
     var sentiment = data.sentiment;
     if(sentiment == "Negative"){
       $('#tweets').append(search_val + " is not trending well on twitter.")
