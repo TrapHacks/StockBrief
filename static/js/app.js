@@ -7,3 +7,13 @@ $(document).ready(function() {
     }
   });
 });
+
+$(".search").on("click", function( e ) {
+    
+    e.preventDefault();
+
+    $("body, html").animate({ 
+        scrollTop: $( $(this).attr('canvas') ).offset().top 
+    }, 600);
+    
+});
