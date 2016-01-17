@@ -9,7 +9,7 @@ if 'DYNO' in os.environ:
 	access_token_key = os.environ['TWITTER_ACCESS_TOKEN_KEY']
 	access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET']
 else:
-	with open('twitter_login.properties', 'rb') as login_file:
+	with open('twitter_login2.properties', 'rb') as login_file:
 		login_info = login_file.readlines()
 		api_key = login_info[0].replace('\n','')
 		api_secret = login_info[1].replace('\n','')
@@ -19,7 +19,7 @@ else:
 def tweet_query(query):
 	auth = tweepy.OAuthHandler(api_key, api_secret)
 	api = tweepy.API(auth)
-	max_tweets = 1000
+	max_tweets = 200
 	searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
 	tweet_bodies = []
 	num_pos = 0
@@ -34,5 +34,5 @@ def tweet_query(query):
 		else:
 			num_neg += 1
 
-	overall_sentiment = 'Positive' if num_pos > 500 else 'Negative'
+	overall_sentiment = 'Positive' if num_pos > 100 else 'Negative'
 	return [num_pos, num_neg, overall_sentiment]
