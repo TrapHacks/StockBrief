@@ -1,19 +1,30 @@
 var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-var lineChartData = {
-    labels : ["January","February","March","April","May","June","July"],
-    datasets : [
-        {
-            label: "My Second dataset",
-            fillColor : "#75C5C6",
-            strokeColor : "#5b5b5b",
-            pointColor : "#75C5C6",
-            pointStrokeColor : "#5b5b5b",
-            pointHighlightFill : "#fff",
-            pointHighlightStroke : "rgba(151,187,205,1)",
-            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-        }
-    ]
-}
+var lineChartData = {}
+
+//on search button click
+$("#search").click(function() {
+  //post request that gets data  
+  var return_data = $.post("/search","Apple",function(data) {
+    console.log(data);
+    lineChartData= {
+        labels : data.dates.slice(0,50).slice(4),
+        datasets : [
+            {
+                label: "My Second dataset",
+                fillColor : "#75C5C6",
+                strokeColor : "#5b5b5b",
+                pointColor : "#75C5C6",
+                pointStrokeColor : "#5b5b5b",
+                pointHighlightFill : "#fff",
+                pointHighlightStroke : "rgba(151,187,205,1)",
+                data : data.prices.slice(0,50)
+            }
+        ]
+    }
+
+  });
+  console.log("return:",return_data);
+});
 
 // event handler for when the collapse is shown
 $(".collapse").on('shown.bs.collapse', function(){
