@@ -77,6 +77,7 @@ $("#search").click(function() {
     }
   })
   .done(function(data){
+    $("#tweet-load").remove();
     $.post('/prediction', search_val, function(data2) {
       console.log(data2);
       var sentiment2 = data2.sentiment;
@@ -86,6 +87,7 @@ $("#search").click(function() {
       else{
         $('#pred').append(search_val + " is predicted to be <span style='color: blue; font-size: 14px'>" + data2.difference + "%</span> above it's opening price today.")
       }
+      $("#pred-load").remove();
     });
   });
   //----------------------------------------------------------
