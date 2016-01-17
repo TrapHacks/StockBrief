@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
 from flask import Flask, render_template, jsonify, request
+from headline_sentiments import nytimes_sentiment
+from scripts.twitter_search import tweet_query
+from microsoft_request import azure_req
 import csv
 import os
 import nytimes
 import yahoo_finance
+import time
 
 app = Flask(__name__)
 
@@ -49,6 +53,42 @@ def nytimes():
 		raise e
 
 	return json
+
+@app.route('/prediction', methods=['POST'])
+def prediction():
+	symbol = request.get_data()
+	print symbol
+	date = time.strftime('%Y-%m-%d')
+	stock = yahoo_finance.Share(symbol)
+	opening_price = stock.get_open()
+
+	twitter_sentiment = tweet_query(symbol)
+	headline_sentiment = nytimes_sentiment(symbol)
+	overall_sentiment_num = twitter_sentiment[0] + headline_sentiment[0]
+	overall_sentiment = 'Positive' if overall_sentiment_num > 505 else 'Negative'
+	azure_sentiment = azure_req(date, symbol, overall_sentiment, opening_price)
+	
+	results = azure_sentiment['Results']['output1']['value']['Values'][0]
+	closing_price = results[5]
+	json_result = {
+		'success': True,
+		'opening_price' : opening_price,
+		'closing_price' : closing_price
+	}
+
+	return jsonify(json_result)
+
+@app.route('/tweet', methods=['POST'])
+def tweets():
+	symbol = request.get_data()
+	twitter_sentiment = tweet_query(symbol)
+	json_result = {
+		'success' : True,
+		'sentiment' : twitter_sentiment[2]
+	}
+
+	return jsonify(json_result)
+
 
 @app.errorhandler(404)
 def not_found(error):

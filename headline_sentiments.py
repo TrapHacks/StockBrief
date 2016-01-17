@@ -20,8 +20,5 @@ def nytimes_sentiment(query):
 			neg_headlines += 1
 
 	
-
-	if pos_headlines > 5: 
-		return 'Positive'
-	else:
-		return 'Negative' 
+	result = [pos_headlines, neg_headlines]
+	return result
