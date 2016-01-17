@@ -1,8 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 body
 {
-	background-color: #ffffff;
+	background-color: #F1F1F1;
 	margin-top: 20px;
+}
+
+ul {
+	background-color: green;
+	width: 180px;
 }
 
 @media (min-width: 768px) {
@@ -17,32 +22,40 @@ body
 .header {
 	font-family: 'Montserrat', sans-serif;
 	color: #A6C675;
+	margin-top: 20px;
+}
+
+.brf-input
+{
+	width: 200px;
 }
 
 input[type="text"]
 {
-	margin: 10px;
+	margin: 20px;
 	padding: 10px;
   border: none;
   border-radius: 0px;
   box-shadow: none;
   border-bottom: solid 2px #c9c9c9;
 
+	text-align: center;
   color: #5b5b5b;
 
 }
-
+/*
 input[type="text"]:focus,
 input[type="text"].focus {
   border-bottom: solid 2px #969696;
 }
-
+*/
 .btn-brief{
-	margin: 10px;
+	margin: 20px;
 	padding: 5px 20px 5px 20px;
 	background-color: #A6C675;
 	border-radius: 0px;
 	font-style: sans-serif;
+	border-bottom: solid 2px #7F9A56;
 	color: white;
 }
 
