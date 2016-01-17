@@ -3,8 +3,7 @@ var lineChartData = {}
 
 //on search button click
 $("#search").click(function() {
-  //post request that gets data 
-  console.log('hello');
+  //post reuqest for chart data------------------------------
   var search_val = $('#stock_name').val();
   var return_data = $.post("/search",search_val,function() {
   })
@@ -32,8 +31,33 @@ $("#search").click(function() {
         pointDotRadius: 4,
         scaleShowVerticalLines: false
     });
-
   });
+  //---------------------------------------------------------
+  // NY TIMES -----------------------------------------------
+  $.post("/nytimes", search_val, function(data) {
+    // console.log(data.docs[0])
+    for(i = 0; i < 10; ++i){
+    var times_var = data.docs[i]
+    var main_headline = times_var.headline.main;
+    var url = times_var.web_url;
+    var par = times_var.lead_paragraph;
+    //check for non existen urls
+    $('#articles').append("<div class='nytimes'><a class='title' href='" + url + "'>" + main_headline + "</a></div>");
+  }
+  });
+  // --------------------------------------------------------
+  // TWITTER ------------------------------------------------
+  // $.post("/tweet", search_val, function(data) {
+  //   console.log(data);
+  //   var sentiment = data.sentiment;
+  //   if(sentiment == "Negative"){
+  //     console.log("U FAKED UP");
+  //   }
+  //   else{
+  //     console.log("YO");
+  //   }
+  // });
+
 });
 
 // event handler for when the collapse is shown

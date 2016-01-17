@@ -90,3 +90,15 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 	border-bottom: solid 2px #c9c9c9;
 	min-height: 324px;
 }
+
+.nytimes
+{
+	padding-left: 10px;
+}
+
+.title
+{
+	font-size: 16px;
+	line-height: 35px;
+	color: #white;
+}
