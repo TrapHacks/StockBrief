@@ -16,8 +16,7 @@ def index():
 
 @app.route("/search", methods=['POST'])
 def search():
-	print 'search'
-	symbol = request.form['search_val']
+	symbol = request.get_data()[11:]
 
 	print symbol
 
@@ -31,9 +30,6 @@ def search():
 		for row in csv_reader:
 			date_list.append(row[5])
 			price_list.append(row[6])
-
-	print date_list
-	print price_list
 
 	return jsonify(dates=date_list, prices=price_list)
 
