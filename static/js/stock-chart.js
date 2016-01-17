@@ -10,7 +10,7 @@ $("#search").click(function() {
   })
   .done(function(data) {
     lineChartData= {
-        labels : data.dates.slice(data.dates.length-60,data.dates.length-1),
+        labels : data.dates.slice(data.dates.length-21,data.dates.length-1),
         datasets : [
             {
                 label: "Closing Prices",
