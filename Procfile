@@ -1,0 +1,1 @@
+web: gunicorn stockbrief:app
