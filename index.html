@@ -8,11 +8,13 @@
 		<link href="css/stockbrief.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<script src="js/jquery-2.2.0.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 	</head>
 	<body>
 	<!-- Header, stock info input -->
 		<div class="container">
-	      <div class="jumbotron" style="background-color: transparent">
+	      <div class="jumbotron card-top">
 	      	<div class="container text-center header">
 		        <h1><img src="stockbrief.png" width="15%" style="margin: 0px 10px 10px 10px;"></img>StockBrief</h1>
 		        <form class="form-inline">
@@ -21,10 +23,26 @@
 		            <input type="text" name="stocks" id="stocks" placeholder="Search Stock Name"></input>
 		           </div>
 		         </form>
-    	       <p><a class="btn btn-lg btn-brief" href="#" role="button">SEARCH</a></p>
+    	       <p><a id="search" class="btn btn-lg btn-brief" role="button" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">SEARCH</a></p>
 	        </div>
 	      </div>
     </div> 
     <!-- /container End stock name-->
-	</body>
+    <!-- START STOCK INFO AND DATA -->
+    <div class="container" style="margin-top: -35px">
+	    <div class="collapse" id="collapseExample">
+	      <div class="well">
+	      	<div>
+	      		<h3> Wiki Summary on ~company name~ </h3>
+	        	<p> Wiki summary </p>
+        	</div>
+	        <div>
+	        	<h3> Closing Values: </h3>
+	        	<canvas id="canvas" height="100" width="500"></canvas>
+	        </div>
+	      </div>
+	    </div>
+    </div>
+    <script src="js/stock-chart.js"></script>	
+  </body>
 </html>
