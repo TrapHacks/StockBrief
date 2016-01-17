@@ -22,7 +22,8 @@ else:
 
 @app.route("/")
 def index():
-	return render_template('index.html')
+    return 'hello'
+    #	return render_template('index.html')
 
 @app.route("/search", methods=['POST'])
 def search():
