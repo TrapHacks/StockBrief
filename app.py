@@ -31,14 +31,6 @@ def search():
 		date_list.append(data['Date'])
 		price_list.append(data['Close'])
 
-	# with open('stock_data/'+symbol+'.csv', 'rb') as csv_file:
-	# 	csv_reader = csv.reader(csv_file, delimiter=',', quotechar='|')
-	# 	next(csv_reader, None)
-
-	# 	for row in csv_reader:
-	# 		date_list.append(row[5])
-	# 		price_list.append(row[6])
-
 	return jsonify(dates=date_list, prices=price_list)
 
 @app.route("/nytimes", methods=['POST'])
