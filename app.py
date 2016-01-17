@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import csv
 import os
 import nytimes
@@ -16,18 +16,24 @@ def index():
 
 @app.route("/search", methods=['POST'])
 def search():
+	print 'search'
 	symbol = request.form['search_val']
+
+	print symbol
 
 	date_list = []
 	price_list = []
 
-	with open('stock_data'+symbol+'.csv', 'rb') as csv_file:
+	with open('stock_data/'+symbol+'.csv', 'rb') as csv_file:
 		csv_reader = csv.reader(csv_file, delimiter=',', quotechar='|')
 		next(csv_reader, None)
 
 		for row in csv_reader:
 			date_list.append(row[5])
 			price_list.append(row[6])
+
+	print date_list
+	print price_list
 
 	return jsonify(dates=date_list, prices=price_list)
 
