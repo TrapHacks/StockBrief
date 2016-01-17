@@ -40,9 +40,9 @@ $("#search").click(function() {
     var times_var = data.docs[i]
     var main_headline = times_var.headline.main;
     var url = times_var.web_url;
-    var par = times_var.lead_paragraph;
+    var date = times_var.pub_date.slice(0,9);
     //check for non existen urls
-    $('#articles').append("<div class='nytimes'><a class='title' href='" + url + "'>" + main_headline + "</a></div>");
+    $('#articles').append("<div class='nytimes'><a class='title' href='" + url + "'>" + main_headline + "</a> | <span style='font-size: 12; color: #969696'>" + date + "</span></div>");
   }
   });
   // --------------------------------------------------------
@@ -51,15 +51,23 @@ $("#search").click(function() {
     console.log(data);
     var sentiment = data.sentiment;
     if(sentiment == "Negative"){
-      console.log("U FAKED UP");
+      $('#tweets').append(search_val + " is not trending well on twitter.")
     }
     else{
-      console.log("YO");
+      $('#tweets').append(search_val + " is trending well on twitter.")
+
     }
   })
   .done(function(data){
     $.post('/prediction', search_val, function(data2) {
       console.log(data2);
+      var sentiment2 = data2.sentiment;
+      if(sentiment2 == "Negative"){
+        $('#pred').append(search_val + " is predicted to be <span style='color: red; font-size: 14px'>" + data2.difference + "%</span> below it's opening price today.")
+      }
+      else{
+        $('#pred').append(search_val + " is predicted to be <span style='color: blue; font-size: 14px'>" + data2.difference + "%</span> above it's opening price today.")
+      }
     });
   });
   //----------------------------------------------------------
