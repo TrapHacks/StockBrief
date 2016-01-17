@@ -119,7 +119,7 @@ def not_found(error):
 def favicon():
 	return send_from_directory(os.path.join(app.root_path,'static'),
 		'favicon.png', mimetype='image/x-icon')
-
+'''
 if __name__ == '__main__':
 	with open('stocks.csv', 'rb') as readfile:
 		reader = csv.reader(readfile)
@@ -132,3 +132,4 @@ if __name__ == '__main__':
 	app.debug = True
 
 	app.run(host='0.0.0.0', port=port)
+'''
